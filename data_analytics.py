@@ -2,7 +2,9 @@ import pandas as pd
 
 # Load the cleaned dataset
 data = pd.read_csv("cleaned_retail_sales.csv")
-
+print("Number of rows:", len(data))
+print("Total sales:", data["Total Amount"].sum())
+print("Missing values:", data.isnull().sum().sum())
 print("SMART RETAIL SALES ANALYTICS")
 print("-" * 35)
 
