@@ -1,62 +1,32 @@
 import pandas as pd
 
-# Read the original dataset
-data = pd.read_excel("retail_original_dataset.xlsx")
+# Data Collection: Read the original retail dataset
+file_name = "retail_original_dataset.xlsx"
 
-print("Original dataset:", data.shape)
+data = pd.read_excel(file_name)
 
-# Remove duplicate rows
-data = data.drop_duplicates()
+# Display dataset information
+print("SMART RETAIL SALES ANALYTICS")
+print("----------------------------")
 
-# Remove rows with missing values
-data = data.dropna()
+print("\nDataset collected successfully!")
 
-# Remove unwanted columns if they exist
-data = data.drop(
-    columns=["Daily Percentage Change", "Year"],
-    errors="ignore"
-)
+print("\nDataset Name:", file_name)
 
-# Create Month from Date
-data["Date"] = pd.to_datetime(data["Date"], dayfirst=True)
-data["Month"] = data["Date"].dt.strftime("%b")
+print("\nNumber of Rows:", data.shape[0])
 
-# Create Age Group
-def get_age_group(age):
-    if age <= 25:
-        return "18-25"
-    elif age <= 35:
-        return "26-35"
-    elif age <= 45:
-        return "36-45"
-    elif age <= 55:
-        return "46-55"
-    else:
-        return "56-64"
+print("Number of Columns:", data.shape[1])
 
-data["Age Group"] = data["Age"].apply(get_age_group)
-
-# Keep the exact required column order
-columns = [
-    "Transaction ID",
-    "Date",
-    "Customer ID",
-    "Gender",
-    "Age",
-    "Product Category",
-    "Quantity",
-    "Price per Unit",
-    "Total Amount",
-    "Month",
-    "Age Group"
-]
-
-data = data[columns]
-
-# Save the cleaned dataset
-data.to_csv("cleaned_retail_sales.csv", index=False)
-
-print("Cleaned dataset:", data.shape)
-print("\nFinal columns:")
+print("\nColumn Names:")
 print(data.columns.tolist())
-print("\nCleaned dataset saved successfully!")
+
+print("\nFirst Five Records:")
+print(data.head())
+
+print("\nDataset Information:")
+data.info()
+
+print("\nMissing Values:")
+print(data.isnull().sum())
+
+print("\nData Collection Completed Successfully!")
