@@ -1,62 +1,36 @@
 import pandas as pd
 
-# Read the original dataset
-data = pd.read_excel("retail_original_dataset.xlsx")
+# Data Collection: Read the original retail dataset
+file_name = "retail_original_dataset.xlsx"
 
-print("Original dataset:", data.shape)
+# Load the dataset
+data = pd.read_excel(file_name)
 
-# Remove duplicate rows
-data = data.drop_duplicates()
+# Display dataset details
+print("SMART RETAIL SALES ANALYTICS")
+print("----------------------------")
 
-# Remove rows with missing values
-data = data.dropna()
+print("\nDataset Source: Kaggle")
+print("Dataset Name:", file_name)
 
-# Remove unwanted columns if they exist
-data = data.drop(
-    columns=["Daily Percentage Change", "Year"],
-    errors="ignore"
-)
+# Display number of rows and columns
+print("\nNumber of Rows:", data.shape[0])
+print("Number of Columns:", data.shape[1])
 
-# Create Month from Date
-data["Date"] = pd.to_datetime(data["Date"], dayfirst=True)
-data["Month"] = data["Date"].dt.strftime("%b")
-
-# Create Age Group
-def get_age_group(age):
-    if age <= 25:
-        return "18-25"
-    elif age <= 35:
-        return "26-35"
-    elif age <= 45:
-        return "36-45"
-    elif age <= 55:
-        return "46-55"
-    else:
-        return "56-64"
-
-data["Age Group"] = data["Age"].apply(get_age_group)
-
-# Keep the exact required column order
-columns = [
-    "Transaction ID",
-    "Date",
-    "Customer ID",
-    "Gender",
-    "Age",
-    "Product Category",
-    "Quantity",
-    "Price per Unit",
-    "Total Amount",
-    "Month",
-    "Age Group"
-]
-
-data = data[columns]
-
-# Save the cleaned dataset
-data.to_csv("cleaned_retail_sales.csv", index=False)
-
-print("Cleaned dataset:", data.shape)
-print("\nFinal columns:")
+# Display column names
+print("\nColumn Names:")
 print(data.columns.tolist())
-print("\nCleaned dataset saved successfully!")
+
+# Display first five records
+print("\nFirst Five Records:")
+print(data.head())
+
+# Display dataset information
+print("\nDataset Information:")
+data.info()
+
+# Display missing values
+print("\nMissing Values:")
+print(data.isnull().sum())
+
+print("\nData Collection Completed Successfully!")
