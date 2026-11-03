@@ -4,6 +4,8 @@ import pandas as pd
 data = pd.read_excel("retail_original_dataset.xlsx")
 
 print("Original dataset:", data.shape)
+print("Duplicate rows:", data.duplicated().sum())
+print("Rows with missing values:", data.isnull().any(axis=1).sum())
 
 # Remove duplicate rows
 data = data.drop_duplicates()
