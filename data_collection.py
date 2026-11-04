@@ -6,7 +6,7 @@ file_name = "retail_original_dataset.xlsx"
 # Load the dataset
 data = pd.read_excel(file_name)
 
-# Display dataset details
+# Display dataset information
 print("SMART RETAIL SALES ANALYTICS")
 print("----------------------------")
 
@@ -33,4 +33,5 @@ data.info()
 print("\nMissing Values:")
 print(data.isnull().sum())
 
+print("\nDataset collected successfully!")
 print("\nData Collection Completed Successfully!")
