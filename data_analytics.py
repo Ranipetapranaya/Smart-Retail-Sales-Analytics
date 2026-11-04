@@ -11,6 +11,13 @@ print("-" * 35)
 # Calculate total sales
 print("\nTotal Sales:")
 print(data["Total Amount"].sum())
+# Calculate total transactions
+print("\nTotal Transactions:")
+print(data["Transaction ID"].nunique())
+
+# Calculate average sales
+print("\nAverage Sales:")
+print(data["Total Amount"].mean())
 
 # Sales by product category
 print("\nSales by Product Category:")
